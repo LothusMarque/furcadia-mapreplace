@@ -1,0 +1,48 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{69DE122B-2B15-4BF7-8471-CC4D6C9A8008}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="MapReplace.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="MRGUI.dproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="MapReplace">
+			<MSBuild Projects="MapReplace.dproj"/>
+		</Target>
+		<Target Name="MapReplace:Clean">
+			<MSBuild Targets="Clean" Projects="MapReplace.dproj"/>
+		</Target>
+		<Target Name="MapReplace:Make">
+			<MSBuild Targets="Make" Projects="MapReplace.dproj"/>
+		</Target>
+		<Target Name="MRGUI">
+			<MSBuild Projects="MRGUI.dproj"/>
+		</Target>
+		<Target Name="MRGUI:Clean">
+			<MSBuild Targets="Clean" Projects="MRGUI.dproj"/>
+		</Target>
+		<Target Name="MRGUI:Make">
+			<MSBuild Targets="Make" Projects="MRGUI.dproj"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="MapReplace;MRGUI"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="MapReplace:Clean;MRGUI:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="MapReplace:Make;MRGUI:Make"/>
+		</Target>
+		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+	</Project>
